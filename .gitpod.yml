@@ -2,6 +2,6 @@ image:
   file: Dockerfile
 tasks:
   - command: >
-        racket server.rkt
+        racket serve.rkt
 ports:
  - port: 8000
