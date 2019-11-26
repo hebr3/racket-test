@@ -1,17 +1,15 @@
-#lang web-server
-(require web-server/servlet-env)
+#lang racket
+(require web-server/servlet
+         web-server/servlet-env)
  
 (define (start req)
-  (start
-   (send/suspend
-    (lambda (k-url)
-      (response/xexpr
-       `(html (head (title "Hello world!"))
-          (body (p "Hey out there!"))))))))
+  (response/xexpr
+   `(html (head (title "Hello world!"))
+          (body (p "Hey out there!")))))
  
 (serve/servlet start
                #:port 8000
+               #:listen-ip #f
                #:servlet-path "/"
-               ;#:stateless? #t
-               ;#:command-line? #t
-               )
+               #:command-line? #t
+               #:stateless? #t)
