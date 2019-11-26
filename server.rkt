@@ -1,14 +1,16 @@
 #lang web-server
-(require web-server/http)
-(provide interface-version stuffer start)
-(define interface-version 'stateless)
-(define stuffer
-  (stuffer-chain
-   serialize-stuffer
-   (md5-stuffer (build-path (find-system-path 'home-dir) ".urls"))))
-(define (start req)
-  (response/xexpr
-   `(html (body (h2 "Look ma, no state!")))))
+(require web-server/servlet-env)
  
-(serve/servlet start #:stateless? #t
-                     #:launch-browser? #f)
+(define (start req)
+  (start
+   (send/suspend
+    (lambda (k-url)
+      (response/xexpr
+       `(html (head (title "Hello world!"))
+          (body (p "Hey out there!"))))))))
+ 
+(serve/servlet start
+               #:port 8000
+               #:servlet-path "/"
+               #:stateless? #t
+               #:command-line? #t)
