@@ -12,5 +12,6 @@
 (serve/servlet start
                #:port 8000
                #:servlet-path "/"
-               #:stateless? #t
-               #:command-line? #t)
+               ;#:stateless? #t
+               ;#:command-line? #t
+               )
